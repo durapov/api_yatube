@@ -12,7 +12,7 @@ from .serializers import (CommentSerializer, GroupSerializer, PostSerializer,
 class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [IsAuthorOrReadOnly, IsAuthenticated,]
+    permission_classes = [IsAuthorOrReadOnly, IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -20,7 +20,7 @@ class PostViewSet(ModelViewSet):
 
 class CommentViewSet(ModelViewSet):
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthorOrReadOnly, IsAuthenticated,]
+    permission_classes = [IsAuthorOrReadOnly, IsAuthenticated]
 
     def get_queryset(self):
         post = get_object_or_404(Post, id=self.kwargs['post_pk'])
